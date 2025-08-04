@@ -4,9 +4,9 @@ import { GeistMono } from 'geist/font/mono'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.dev',
+  title: 'Harmony TV - Live TV Streaming',
+  description: 'Stream live television channels with Harmony TV',
+  generator: 'Harmony TV',
 }
 
 export default function RootLayout({
