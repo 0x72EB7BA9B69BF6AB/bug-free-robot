@@ -149,9 +149,9 @@ export default function Home() {
               >
                 {t.welcome}
               </motion.p>
-              <motion.div variants={itemVariants} className="space-y-4">
-                <h2 className="text-xl sm:text-2xl font-semibold mb-6">{t.selectLanguage}</h2>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
+              <motion.div variants={itemVariants} className="space-y-6">
+                <h2 className="text-xl sm:text-2xl font-semibold">{t.selectLanguage}</h2>
+                <div className="flex flex-col gap-3 max-w-md mx-auto">
                   {languages.map((language) => (
                     <Button
                       key={language.code}
@@ -168,7 +168,7 @@ export default function Home() {
                     </Button>
                   ))}
                 </div>
-                <p className="text-sm text-gray-500 mt-4">
+                <p className="text-sm text-gray-500">
                   {t.languageAvailability}
                 </p>
               </motion.div>
