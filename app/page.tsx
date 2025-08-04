@@ -65,8 +65,8 @@ export default function Home() {
   const handleAcceptTerms = () => {
     // Store language preference
     localStorage.setItem("selectedLanguage", selectedLanguage || "en")
-    // Redirect to main streaming interface (for now, just show success)
-    alert("Welcome to Harmony TV! Streaming interface will be available soon.")
+    // Redirect to main streaming interface
+    router.push("/streaming")
   }
 
   const t = translations[currentLanguage]
