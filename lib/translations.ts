@@ -17,7 +17,17 @@ export const translations = {
     accept: "I Accept",
     goBack: "Go Back",
     english: "English",
-    french: "Français"
+    french: "Français",
+    // Streaming interface
+    channels: "Channels",
+    liveChat: "Live Chat",
+    audioLanguage: "Audio Language",
+    currentlyWatching: "Currently Watching",
+    noChannelSelected: "Select a channel to start watching",
+    sendMessage: "Send message...",
+    send: "Send",
+    audioAvailableIn: "Audio available in",
+    and: "and"
   },
   fr: {
     welcome: "Bienvenue sur Harmony TV - Votre Passerelle vers la Télévision en Direct",
@@ -37,7 +47,17 @@ export const translations = {
     accept: "J'accepte",
     goBack: "Retour",
     english: "English",
-    french: "Français"
+    french: "Français",
+    // Streaming interface
+    channels: "Chaînes",
+    liveChat: "Chat en direct",
+    audioLanguage: "Langue audio",
+    currentlyWatching: "En cours de visionnage",
+    noChannelSelected: "Sélectionnez une chaîne pour commencer à regarder",
+    sendMessage: "Envoyer un message...",
+    send: "Envoyer",
+    audioAvailableIn: "Audio disponible en",
+    and: "et"
   }
 }
 
