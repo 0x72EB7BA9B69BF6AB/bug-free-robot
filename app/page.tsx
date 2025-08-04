@@ -3,10 +3,11 @@
 import { motion, useMotionValue, useSpring } from "framer-motion"
 import { useEffect, useRef, useState } from "react"
 import { useRouter } from "next/navigation"
-import { Footer } from "@/components/footer"
+
 import { Preloader } from "@/components/preloader"
 import { Button } from "@/components/ui/button"
 import TypeWriter from "@/components/type-writer"
+import { translations, Language } from "@/lib/translations"
 
 const blink = {
   "0%, 100%": { opacity: 1 },
@@ -19,7 +20,8 @@ export default function Home() {
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
   const [showLanguageSelection, setShowLanguageSelection] = useState(false)
-  const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null)
+  const [selectedLanguage, setSelectedLanguage] = useState<Language | null>(null)
+  const [currentLanguage, setCurrentLanguage] = useState<Language>("en")
   const [showTerms, setShowTerms] = useState(false)
 
   const gridX = useSpring(mouseX, {
@@ -49,13 +51,14 @@ export default function Home() {
     // Show language selection after preloader
     const timer = setTimeout(() => {
       setShowLanguageSelection(true)
-    }, 1500)
+    }, 300)
 
     return () => clearTimeout(timer)
   }, [])
 
-  const handleLanguageSelect = (language: string) => {
+  const handleLanguageSelect = (language: Language) => {
     setSelectedLanguage(language)
+    setCurrentLanguage(language)
     setShowTerms(true)
   }
 
@@ -65,6 +68,8 @@ export default function Home() {
     // Redirect to main streaming interface (for now, just show success)
     alert("Welcome to Harmony TV! Streaming interface will be available soon.")
   }
+
+  const t = translations[currentLanguage]
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -90,12 +95,12 @@ export default function Home() {
   }
 
   const languages = [
-    { code: "en", name: "English", available: true },
-    { code: "fr", name: "Français", available: true },
-    { code: "es", name: "Español", available: false },
-    { code: "de", name: "Deutsch", available: false },
-    { code: "it", name: "Italiano", available: false },
-    { code: "pt", name: "Português", available: false },
+    { code: "en" as Language, name: t.english, available: true },
+    { code: "fr" as Language, name: t.french, available: true },
+    { code: "es" as Language, name: "Español", available: false },
+    { code: "de" as Language, name: "Deutsch", available: false },
+    { code: "it" as Language, name: "Italiano", available: false },
+    { code: "pt" as Language, name: "Português", available: false },
   ]
 
   return (
@@ -132,20 +137,22 @@ export default function Home() {
                 variants={itemVariants}
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight flex flex-wrap items-center justify-center gap-2"
               >
-                <span className="bg-white text-black px-2">Harmony</span>
-                <span className="flex items-center">
+                <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-transparent bg-clip-text px-2 py-1 rounded-lg border-2 border-blue-500 bg-blue-500/10 backdrop-blur-sm">
+                  Harmony
+                </span>
+                <span className="flex items-center text-white">
                   <TypeWriter text="TV" delay={150} />
-                  <span className="w-[2px] h-[1em] bg-white animate-[blink_1s_ease-in-out_infinite]" />
+                  <span className="w-[2px] h-[1em] bg-blue-400 animate-[blink_1s_ease-in-out_infinite] ml-1" />
                 </span>
               </motion.h1>
               <motion.p
                 variants={itemVariants}
                 className="text-base sm:text-lg lg:text-xl text-gray-400 max-w-2xl mx-auto px-4"
               >
-                Welcome to Harmony TV - Your Gateway to Live Television Streaming
+                {t.welcome}
               </motion.p>
               <motion.div variants={itemVariants} className="space-y-4">
-                <h2 className="text-xl sm:text-2xl font-semibold mb-6">Select Your Language</h2>
+                <h2 className="text-xl sm:text-2xl font-semibold mb-6">{t.selectLanguage}</h2>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
                   {languages.map((language) => (
                     <Button
@@ -154,7 +161,7 @@ export default function Home() {
                       disabled={!language.available}
                       className={`w-full py-4 px-6 text-base font-medium transition-all duration-300 ${
                         language.available
-                          ? "border-2 border-white text-white hover:bg-white hover:text-black bg-transparent"
+                          ? "border-2 border-blue-500 text-white hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:border-transparent bg-transparent"
                           : "border-2 border-gray-600 text-gray-600 bg-transparent cursor-not-allowed"
                       }`}
                       onClick={() => language.available && handleLanguageSelect(language.code)}
@@ -164,7 +171,7 @@ export default function Home() {
                   ))}
                 </div>
                 <p className="text-sm text-gray-500 mt-4">
-                  Only English and French are currently available
+                  {t.languageAvailability}
                 </p>
               </motion.div>
             </motion.div>
@@ -179,46 +186,44 @@ export default function Home() {
               className="text-center max-w-[90%] sm:max-w-4xl mx-auto space-y-6 sm:space-y-8"
             >
               <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
-                Terms of Service
+                {t.termsOfService}
               </h1>
-              <div className="bg-gray-900 bg-opacity-50 backdrop-blur-sm border border-gray-600 rounded-lg p-6 sm:p-8 text-left space-y-4">
-                <h2 className="text-xl font-semibold">Important Notice</h2>
+              <div className="bg-gradient-to-br from-gray-900/80 to-blue-900/20 backdrop-blur-sm border border-blue-500/30 rounded-lg p-6 sm:p-8 text-left space-y-4 shadow-2xl">
+                <h2 className="text-xl font-semibold text-blue-300">{t.importantNotice}</h2>
                 <p className="text-gray-300 leading-relaxed">
-                  By using Harmony TV, you acknowledge and agree that:
+                  {t.termsIntro}
                 </p>
                 <ul className="list-disc list-inside space-y-2 text-gray-300">
-                  <li>You have valid subscriptions for all television channels available on this platform</li>
-                  <li>You are solely responsible for ensuring your access rights to the content</li>
-                  <li>In case of any legal issues or disputes, the responsibility lies entirely with you</li>
-                  <li>Harmony TV serves as a streaming platform and does not provide content licenses</li>
-                  <li>You must comply with all applicable copyright and broadcasting laws in your jurisdiction</li>
+                  {t.terms.map((term, index) => (
+                    <li key={index}>{term}</li>
+                  ))}
                 </ul>
                 <p className="text-gray-300 leading-relaxed">
-                  By clicking "I Accept", you confirm that you understand and agree to these terms.
+                  {t.termsConfirmation}
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
                   size="lg"
-                  className="w-full sm:w-auto border-2 border-white text-white hover:bg-white hover:text-black transition-all duration-300 bg-transparent px-8 py-4"
+                  className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 transition-all duration-300 px-8 py-4 shadow-lg"
                   onClick={handleAcceptTerms}
                 >
-                  I Accept
+                  {t.accept}
                 </Button>
                 <Button
                   size="lg"
                   variant="ghost"
-                  className="w-full sm:w-auto border-2 border-gray-600 text-gray-400 hover:bg-gray-600 hover:text-white transition-all duration-300 bg-transparent px-8 py-4"
+                  className="w-full sm:w-auto border-2 border-gray-500 text-gray-300 hover:bg-gray-700 hover:text-white hover:border-gray-400 transition-all duration-300 bg-transparent px-8 py-4"
                   onClick={() => setShowTerms(false)}
                 >
-                  Go Back
+                  {t.goBack}
                 </Button>
               </div>
             </motion.div>
           </motion.section>
         )}
 
-        <Footer />
+
       </div>
     </div>
   )
