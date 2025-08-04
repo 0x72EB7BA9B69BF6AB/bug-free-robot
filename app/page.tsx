@@ -137,12 +137,10 @@ export default function Home() {
                 variants={itemVariants}
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight flex flex-wrap items-center justify-center gap-2"
               >
-                <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-transparent bg-clip-text px-2 py-1 rounded-lg border-2 border-blue-500 bg-blue-500/10 backdrop-blur-sm">
-                  Harmony
-                </span>
-                <span className="flex items-center text-white">
+                <span className="bg-white text-black px-2">Harmony</span>
+                <span className="flex items-center">
                   <TypeWriter text="TV" delay={150} />
-                  <span className="w-[2px] h-[1em] bg-blue-400 animate-[blink_1s_ease-in-out_infinite] ml-1" />
+                  <span className="w-[2px] h-[1em] bg-white animate-[blink_1s_ease-in-out_infinite]" />
                 </span>
               </motion.h1>
               <motion.p
@@ -161,7 +159,7 @@ export default function Home() {
                       disabled={!language.available}
                       className={`w-full py-4 px-6 text-base font-medium transition-all duration-300 ${
                         language.available
-                          ? "border-2 border-blue-500 text-white hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:border-transparent bg-transparent"
+                          ? "border-2 border-white text-white hover:bg-white hover:text-black bg-transparent"
                           : "border-2 border-gray-600 text-gray-600 bg-transparent cursor-not-allowed"
                       }`}
                       onClick={() => language.available && handleLanguageSelect(language.code)}
@@ -188,8 +186,8 @@ export default function Home() {
               <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
                 {t.termsOfService}
               </h1>
-              <div className="bg-gradient-to-br from-gray-900/80 to-blue-900/20 backdrop-blur-sm border border-blue-500/30 rounded-lg p-6 sm:p-8 text-left space-y-4 shadow-2xl">
-                <h2 className="text-xl font-semibold text-blue-300">{t.importantNotice}</h2>
+              <div className="bg-gray-900 bg-opacity-50 backdrop-blur-sm border border-gray-600 rounded-lg p-6 sm:p-8 text-left space-y-4">
+                <h2 className="text-xl font-semibold">{t.importantNotice}</h2>
                 <p className="text-gray-300 leading-relaxed">
                   {t.termsIntro}
                 </p>
@@ -205,7 +203,7 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
                   size="lg"
-                  className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 transition-all duration-300 px-8 py-4 shadow-lg"
+                  className="w-full sm:w-auto border-2 border-white text-white hover:bg-white hover:text-black transition-all duration-300 bg-transparent px-8 py-4"
                   onClick={handleAcceptTerms}
                 >
                   {t.accept}
@@ -213,7 +211,7 @@ export default function Home() {
                 <Button
                   size="lg"
                   variant="ghost"
-                  className="w-full sm:w-auto border-2 border-gray-500 text-gray-300 hover:bg-gray-700 hover:text-white hover:border-gray-400 transition-all duration-300 bg-transparent px-8 py-4"
+                  className="w-full sm:w-auto border-2 border-gray-600 text-gray-400 hover:bg-gray-600 hover:text-white transition-all duration-300 bg-transparent px-8 py-4"
                   onClick={() => setShowTerms(false)}
                 >
                   {t.goBack}
